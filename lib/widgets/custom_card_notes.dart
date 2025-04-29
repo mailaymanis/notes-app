@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notes_app/views/edit_screen.dart';
 
 class CustomCardNotes extends StatelessWidget {
   const CustomCardNotes({super.key});
@@ -25,7 +26,12 @@ class CustomCardNotes extends StatelessWidget {
                 ),
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => EditScreen()),
+                  );
+                },
                 icon: Icon(Icons.edit, color: Colors.white),
               ),
             ],
