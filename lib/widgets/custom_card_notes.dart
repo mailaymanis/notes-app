@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:notes_app/views/edit_screen.dart';
 
 class CustomCardNotes extends StatelessWidget {
-  const CustomCardNotes({super.key});
+  const CustomCardNotes({
+    super.key,
+    required this.content,
+    required this.title,
+    required this.deleteOnPressed,
+    required this.editOnPressed,
+  });
+  final String title;
+  final String content;
+  final void Function()? deleteOnPressed;
+  final void Function()? editOnPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -13,25 +22,20 @@ class CustomCardNotes extends StatelessWidget {
         child: ListTile(
           contentPadding: EdgeInsets.zero,
           isThreeLine: true,
-          title: Text("title", style: TextStyle(color: Colors.white)),
-          subtitle: Text("content", style: TextStyle(color: Colors.white)),
+          title: Text(title, style: TextStyle(color: Colors.white)),
+          subtitle: Text(content, style: TextStyle(color: Colors.white)),
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
               IconButton(
-                onPressed: () {},
+                onPressed: deleteOnPressed,
                 icon: Icon(
                   Icons.delete,
                   color: Colors.black.withValues(alpha: 0.7),
                 ),
               ),
               IconButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => EditScreen()),
-                  );
-                },
+                onPressed: editOnPressed,
                 icon: Icon(Icons.edit, color: Colors.white),
               ),
             ],
