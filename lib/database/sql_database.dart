@@ -16,7 +16,7 @@ class SqlDatabase {
 
   initialDatabase() async {
     String databasesPath = await getDatabasesPath();
-    String path = join(databasesPath, "notes.db");
+    String path = join(databasesPath, 'notes.db');
     Database database = await openDatabase(
       path,
       version: 1,
@@ -26,7 +26,7 @@ class SqlDatabase {
   }
 
   _onCreate(Database db, int version) async {
-    db.execute(
+    await db.execute(
       "CREATE TABLE notes (id INTEGER PRIMARY KEY NOT NULL , title TEXT NOT NULL , content TEXT NOT NULL )",
     );
     log("onCreate Success==========");
