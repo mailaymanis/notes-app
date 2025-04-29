@@ -80,7 +80,21 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             );
                           },
-                          deleteOnPressed: () {},
+                          deleteOnPressed: () async {
+                            var response = await sqlDb.deleteeData(
+                              "DELETE FROM notes WHERE id = ${notes[index]["id"]}",
+                            );
+
+                            if (response > 0) {
+                              if (context.mounted) {
+                                notes.removeWhere(
+                                  (element) =>
+                                      element["id"] == notes[index]["id"],
+                                );
+                                setState(() {});
+                              }
+                            }
+                          },
                         );
                       },
                     ),
