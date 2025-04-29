@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:notes_app/widgets/custom_card_notes.dart';
+import 'package:notes_app/widgets/custom_floating_button.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -6,6 +8,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: CustomFloatingButton(),
       appBar: AppBar(
         title: const Text(
           "Notes",
@@ -25,6 +28,21 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
         ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+        child: ListView(
+          children: [
+            ListView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: 5,
+              itemBuilder: (context, index) {
+                return CustomCardNotes();
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
