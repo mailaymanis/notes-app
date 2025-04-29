@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notes_app/views/home_screen.dart';
 
 void main() {
   runApp(const NotesApp());
@@ -12,6 +13,7 @@ class NotesApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
+        fontFamily: "Poppins",
         scaffoldBackgroundColor: Colors.black,
         brightness: Brightness.dark,
         appBarTheme: AppBarTheme(
@@ -23,6 +25,7 @@ class NotesApp extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
+      home: const HomeScreen(),
     );
   }
 }
