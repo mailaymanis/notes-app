@@ -34,8 +34,24 @@ class _TestDatabaseState extends State<TestDatabase> {
             },
             child: Text("Insert Data"),
           ),
-          ElevatedButton(onPressed: () {}, child: Text("Update Data")),
-          ElevatedButton(onPressed: () {}, child: Text("Delete Data")),
+          ElevatedButton(
+            onPressed: () async {
+              var response = await sqlDb.updateData(
+                "UPDATE notes SET title = 'second note' , content = 'i am egyptian' WHERE id = 2",
+              );
+              log(response.toString());
+            },
+            child: Text("Update Data"),
+          ),
+          ElevatedButton(
+            onPressed: () async {
+              var response = await sqlDb.deleteeData(
+                "DELETE FROM notes WHERE id = 3",
+              );
+              log(response.toString());
+            },
+            child: Text("Delete Data"),
+          ),
         ],
       ),
     );
