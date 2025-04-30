@@ -1,18 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:notes_app/database/sql_database.dart';
+import 'package:notes_app/views/home_screen.dart';
 import 'package:notes_app/widgets/custom_button.dart';
 import 'package:notes_app/widgets/custom_text_field.dart';
 
 class EditScreen extends StatefulWidget {
-  const EditScreen({super.key});
+  const EditScreen({super.key, this.id, this.title, this.content});
+  final int? id;
+  final String? title;
+  final String? content;
 
   @override
   State<EditScreen> createState() => _EditScreenState();
 }
 
 class _EditScreenState extends State<EditScreen> {
+  SqlDatabase sqlDb = SqlDatabase();
   final formKey = GlobalKey<FormState>();
   final titleController = TextEditingController();
   final contentController = TextEditingController();
+  @override
+  void initState() {
+    titleController.text = widget.title ?? "";
+    contentController.text = widget.content ?? "";
+    super.initState();
+  }
+
   @override
   void dispose() {
     titleController.dispose();
@@ -74,7 +87,27 @@ class _EditScreenState extends State<EditScreen> {
                     return null;
                   },
                 ),
-                CustomButton(onPressed: () {}, text: "Edit Note"),
+                CustomButton(
+                  onPressed: () async {
+                    if (formKey.currentState!.validate()) {
+                      var response = await sqlDb.updateData(
+                        "UPDATE notes SET title = '${titleController.text}' , content = '${contentController.text}' WHERE id = ${widget.id}",
+                      );
+                      if (response > 0) {
+                        if (context.mounted) {
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const HomeScreen(),
+                            ),
+                            (route) => false,
+                          );
+                        }
+                      }
+                    }
+                  },
+                  text: "Edit Note",
+                ),
               ],
             ),
           ),

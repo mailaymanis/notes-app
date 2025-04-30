@@ -23,7 +23,10 @@ class CustomCardNotes extends StatelessWidget {
           contentPadding: EdgeInsets.zero,
           isThreeLine: true,
           title: Text(title, style: TextStyle(color: Colors.white)),
-          subtitle: Text(content, style: TextStyle(color: Colors.white)),
+          subtitle: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(content, style: TextStyle(color: Colors.white)),
+          ),
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
             children: [

@@ -76,7 +76,12 @@ class _HomeScreenState extends State<HomeScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => EditScreen(),
+                                builder:
+                                    (context) => EditScreen(
+                                      id: notes[index]['id'],
+                                      title: notes[index]['title'],
+                                      content: notes[index]['content'],
+                                    ),
                               ),
                             );
                           },
